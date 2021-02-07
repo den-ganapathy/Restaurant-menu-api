@@ -45,4 +45,15 @@ router.post("/menu", async (req, res) => {
   });
 });
 
+router.get("/searchRestaurant", async (req, res) => {
+  const { search } = req.query;
+  console.log(search);
+  RestaurantDetails.find(
+    { name: new RegExp(search, "i") },
+    function (err, data) {
+      res.send(data);
+    }
+  );
+});
+
 module.exports = router;
